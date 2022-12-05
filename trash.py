@@ -15,11 +15,11 @@ def main(code : str):
             elif func[0] == '-':
                 ARRAY[int(func[1:])] -= 1
             elif func[0] == '=':
-                ARRAY[int(func[1:].split(":")[0])] = int(func[1:].split(":")[0])
+                ARRAY[int(func[1:].split(":")[1])] = int(func[1:].split(":")[0])
             elif func[0] == 'p':
                 print(ARRAY[int(func[1:])], end='')
             elif func[0] == '>':
-                string = input()[0]
+                string = input("> ")[0]
                 try:
                     ARRAY[int(func[1:])] = int(string)
                 except:
