@@ -1,1 +1,2 @@
-# trash++
+# trash
+an annoying programming language
