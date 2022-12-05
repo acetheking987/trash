@@ -19,7 +19,11 @@ def main(code : str):
             elif func[0] == 'p':
                 print(ARRAY[int(func[1:])], end='')
             elif func[0] == '>':
-                ARRAY[int(func[1:])] = int(input())
+                string = input()[0]
+                try:
+                    ARRAY[int(func[1:])] = int(string)
+                except:
+                    ARRAY[int(func[1:])] = ord(string)
             elif func[0] == 'c':
                 print(chr(ARRAY[int(func[1:])]), end='')
             elif func[0] == 'i':
