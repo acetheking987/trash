@@ -1,5 +1,6 @@
-#text = input("enter text: ")
-text = open("raw\\text.txt").read()
+text = input("enter text: ")
+ofset = int(input("enter ofset: "))
+#text = open("raw\\text.txt").read()
 current = 0
 index = 0
 output = ""
@@ -9,14 +10,14 @@ for character in text:
     diff = unicode - current
     if diff > 0:
         output += f"+0;"
-        output += f"i0:{unicode}:{(index*4)+3};"
-        output += f"g{index*4};"
+        output += f"i0:{unicode}:{(index*4)+3+ofset};"
+        output += f"g{(index*4)+ofset};"
         output += f"c0;"
         index += 1
     elif diff < 0:
         output += f"-0;"
-        output += f"i0:{unicode}:{(index*4)+3};"
-        output += f"g{index*4};"
+        output += f"i0:{unicode}:{(index*4)+3+ofset};"
+        output += f"g{(index*4)+ofset};"
         output += f"c0;"
         index += 1
     else:
@@ -27,5 +28,5 @@ for character in text:
         index += 1
     current = unicode
 
-#print(output)
-open("output.txt", "w").write(output.replace(";", ";\n"))
+print(output.replace(";", ";\n"))
+#open("output.txt", "w").write(output.replace(";", ";\n"))

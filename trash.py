@@ -1,7 +1,8 @@
-import sys
+import sys, time
 
 ARRAY = [0 for i in range(200)]
 INDEX = -1
+DEBUG = False
 
 def main(code : str):
     global ARRAY, INDEX
@@ -9,21 +10,25 @@ def main(code : str):
         try:
             INDEX += 1
             func = code.split(';')[INDEX]
+            if DEBUG:
+                print(f"{func}\t{[i for i in ARRAY[:7]]}")
+                time.sleep(0.1)
             if func == '': continue
+            elif '#' in func: continue
             elif func[0] == '+':
                 ARRAY[int(func[1:])] += 1
             elif func[0] == '-':
                 ARRAY[int(func[1:])] -= 1
             elif func[0] == '=':
-                ARRAY[int(func[1:].split(":")[1])] = int(func[1:].split(":")[0])
+                ARRAY[int(func[1:].split(":")[0])] = ARRAY[int(func[1:].split(":")[1])]
             elif func[0] == 'p':
                 print(ARRAY[int(func[1:])], end='')
             elif func[0] == '>':
-                string = input("> ")[0]
+                string = input("> ")
                 try:
                     ARRAY[int(func[1:])] = int(string)
                 except:
-                    ARRAY[int(func[1:])] = ord(string)
+                    ARRAY[int(func[1:])] = ord(string[0])
             elif func[0] == 'c':
                 print(chr(ARRAY[int(func[1:])]), end='')
             elif func[0] == 'i':
@@ -45,6 +50,9 @@ if __name__ == '__main__':
     if len(args) == 0:
         print('Usage:\ttrash -f <file>\n\ttrash <code>')
         sys.exit()
+    if "-d" in args:
+        args.remove("-d")
+        DEBUG = True
     if "-f" in args:
         args.remove("-f")
         with open(args[0]) as f:
